@@ -1,0 +1,51 @@
+﻿<Page x:Class="GritzmanMotorsWPF.OrderHistoryPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:GritzmanMotorsWPF"
+      mc:Ignorable="d" 
+      d:DesignHeight="1024" d:DesignWidth="1440"
+      Title="OrderHistoryPage">
+
+    <Grid>
+        <local:NavigationBar Panel.ZIndex="1000" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="32,75,0,0"/>
+        <local:Background/>
+
+        <StackPanel HorizontalAlignment="Right" VerticalAlignment="Top">
+            <Button x:Name="markAsDoneButton" Content="Mark As Done" Panel.ZIndex="1001" FontSize="24" Visibility="Collapsed" Foreground="White" Click="MarkAsDone_Click" Height="50" Margin="1161,75,61,899" Width="182">
+                <Button.Style>
+                    <Style TargetType="{x:Type Button}">
+                        <Setter Property="Background" Value="#66CDAA"/>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type Button}">
+                                    <Border Background="{TemplateBinding Background}" CornerRadius="10">
+                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </Button.Style>
+            </Button>
+        </StackPanel>
+
+        <ListView Margin="196,174,198,50" Name="dataListView" FontSize="20" Foreground="#ffff" Background="Transparent" RenderTransformOrigin="0.5,0.5">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="ID" Width="50" DisplayMemberBinding="{Binding Id}" />
+                    <GridViewColumn Header="Customer" Width="110" DisplayMemberBinding="{Binding CustomerCode.FirstName}" />
+                    <GridViewColumn Header="Car Company" Width="130" DisplayMemberBinding="{Binding PriceCode.ModelCode.CompanyCode.CarCompanyName}" />
+                    <GridViewColumn Header="Car Model" Width="110" DisplayMemberBinding="{Binding PriceCode.ModelCode.CarModelName}" />
+                    <GridViewColumn Header="Price" Width="80" DisplayMemberBinding="{Binding PriceCode.Price}" />
+                    <GridViewColumn Header="Car Ready" Width="100" DisplayMemberBinding="{Binding CarReady}" />
+                    <GridViewColumn Header="Employee" Width="110" DisplayMemberBinding="{Binding EmployeeCode.FirstName}" />
+                    <GridViewColumn Header="Date Of Treatment" Width="180" DisplayMemberBinding="{Binding DateOfTreatment}" />
+                    <GridViewColumn Header="Date Of Order" Width="140" DisplayMemberBinding="{Binding DateOfOrder}" />
+                </GridView>
+            </ListView.View>
+        </ListView>
+        
+    </Grid>
+</Page>

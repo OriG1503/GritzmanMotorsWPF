@@ -1,0 +1,43 @@
+﻿<Page x:Class="GritzmanMotorsWPF.HomePage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:GritzmanMotorsWPF"
+      mc:Ignorable="d" 
+      d:DesignHeight="1024" d:DesignWidth="1440"
+      Title="HomePage">
+
+    <Grid Background="#FF01052F">
+        <local:NavigationBar Panel.ZIndex="1000" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="32,75,0,0"/>
+        <local:Background/>
+        <Image Source="Images/Phone.png" Margin="720,318,230,230"/>
+
+        <!-- Display Person Information -->
+        <StackPanel HorizontalAlignment="Left" VerticalAlignment="Top" Margin="353,446,0,0" Height="220">
+            <Label x:Name="firstNameLabel" Content="First Name: " FontSize="24" Foreground="#66CDAA" FontFamily="Segoe UI" FontWeight="Bold" Margin="0,0,0,0"/>
+            <Label x:Name="lastNameLabel" Content="Last Name: " FontSize="24" Foreground="#66CDAA" FontFamily="Segoe UI" FontWeight="Bold" Margin="0,40,0,0"/>
+            <Label x:Name="BirthDateLabel" Content="Date Of Birth: " FontSize="24" Foreground="#66CDAA" FontFamily="Segoe UI" FontWeight="Bold" Margin="0,40,0,0"/>
+        </StackPanel>
+
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,874,0,0" Height="50">
+            <Button Content="Logout" Width="180" Height="50" FontSize="24" Foreground="White" Click="Logout_Click" Margin="0,0,0,50">
+                <Button.Style>
+                    <Style TargetType="{x:Type Button}">
+                        <Setter Property="Background" Value="#66CDAA"/>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type Button}">
+                                    <Border Background="{TemplateBinding Background}" CornerRadius="10">
+                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </Button.Style>
+            </Button>
+        </StackPanel>
+
+    </Grid>
+</Page>

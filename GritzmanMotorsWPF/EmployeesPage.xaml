@@ -1,0 +1,28 @@
+﻿<Page x:Class="GritzmanMotorsWPF.EmployeesPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:GritzmanMotorsWPF"
+      mc:Ignorable="d" 
+      d:DesignHeight="1024" d:DesignWidth="1440"
+      Title="EmployeesPage">
+
+    <Grid>
+        <local:NavigationBar Panel.ZIndex="1000" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="32,75,0,0"/>
+        <local:Background/>
+
+        <ListView Margin="196,174,198,50" Name="dataListView" FontSize="20" Foreground="#ffff" Background="Transparent" RenderTransformOrigin="0.5,0.5">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="ID" Width="50" DisplayMemberBinding="{Binding Id}" />
+                    <GridViewColumn Header="First Name" Width="200" DisplayMemberBinding="{Binding FirstName}" />
+                    <GridViewColumn Header="Last Name" Width="200" DisplayMemberBinding="{Binding LastName}" />
+                    <GridViewColumn Header="Date Of Birth" Width="200" DisplayMemberBinding="{Binding DateOfBirth}" />
+                    <GridViewColumn Header="Specialization" Width="200" DisplayMemberBinding="{Binding SpecializationCode.SpecializationName}" />
+
+                </GridView>
+            </ListView.View>
+        </ListView>
+    </Grid>
+</Page>

@@ -1,0 +1,82 @@
+﻿<Page x:Class="GritzmanMotorsWPF.LoginPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:GritzmanMotorsWPF"
+      mc:Ignorable="d" 
+      d:DesignHeight="1024" d:DesignWidth="1440"
+      Title="LoginPage">
+
+    <Grid Background="#FF01052F">
+        <local:Background/>
+
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,50,0,0">
+            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,50,0,0">
+                <Image Source="Images\Logo.png" Width="200" Height="204" Margin="0,-10,0,-30"/>
+
+                <Label Content="Username:" FontSize="24" Foreground="#66CDAA"  Margin="0,0,0,5" FontFamily="Segoe UI" FontWeight="Bold"/>
+                <Border Width="300" Height="40" CornerRadius="20" Background="#F2F2F2" Margin="0,0,0,15">
+                    <TextBox x:Name="txtUsername" Width="290" Height="40" Margin="5" FontSize="20">
+                        <TextBox.Foreground>
+                            <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                                <GradientStop Color="#800080" Offset="0.0"/>
+                                <!-- Purple gradient -->
+                                <GradientStop Color="#9932CC" Offset="0.25"/>
+                                <GradientStop Color="#8A2BE2" Offset="0.5"/>
+                                <GradientStop Color="#800080" Offset="0.75"/>
+                                <GradientStop Color="#9932CC" Offset="1.0"/>
+                            </LinearGradientBrush>
+                        </TextBox.Foreground>
+                    </TextBox>
+                </Border>
+
+                <Label Content="Password:" FontSize="24" Foreground="#66CDAA" Margin="0,0,0,5" FontFamily="Segoe UI" FontWeight="Bold"/>
+                <Border Width="300" Height="40" CornerRadius="20" Background="#F2F2F2" Margin="0,0,0,15">
+                    <PasswordBox x:Name="txtPassword" Width="290" Height="40" Margin="5" FontSize="20">
+                        <PasswordBox.Foreground>
+                            <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                                <GradientStop Color="#800080" Offset="0.0"/>
+                                <!-- Purple gradient -->
+                                <GradientStop Color="#9932CC" Offset="0.25"/>
+                                <GradientStop Color="#8A2BE2" Offset="0.5"/>
+                                <GradientStop Color="#800080" Offset="0.75"/>
+                                <GradientStop Color="#9932CC" Offset="1.0"/>
+                            </LinearGradientBrush>
+                        </PasswordBox.Foreground>
+                    </PasswordBox>
+                </Border>
+
+                <Button Content="Login" Width="180" Height="50" FontSize="24" Foreground="White" Click="Login_Click" Margin="0,10,0,0">
+    <Button.Style>
+        <Style TargetType="{x:Type Button}">
+            <Setter Property="Background" Value="#66CDAA"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border Background="{TemplateBinding Background}" CornerRadius="10">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Button.Style>
+</Button>
+
+
+                <!-- Label for redirecting to the register page -->
+                <TextBlock Text="" FontSize="16" HorizontalAlignment="Left" Foreground ="White" Margin="00,10,0,0">
+                    <TextBlock.Inlines>
+                        <Run Text="" />
+                        <Hyperlink Click="RedirectToRegisterPage">
+                            <Run Text="I don't have an account." Foreground="White" />
+                        </Hyperlink>
+                    </TextBlock.Inlines>
+                </TextBlock>
+
+            </StackPanel>
+
+        </StackPanel>
+    </Grid>
+</Page>

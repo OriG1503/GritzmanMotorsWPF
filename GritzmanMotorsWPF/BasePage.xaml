@@ -1,0 +1,21 @@
+﻿<Page x:Class="GritzmanMotorsWPF.BasePage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:GritzmanMotorsWPF"
+      mc:Ignorable="d" 
+      d:DesignHeight="1024" d:DesignWidth="1440"
+      Title="BasePage">
+
+    <Grid>
+        <Canvas xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="Page" Width="1440" Height="1024" Clip="F1 M 0,0L 1440,0L 1440,1024L 0,1024L 0,0" UseLayoutRounding="False">
+            <Canvas x:Name="Layer_1" Width="1440" Height="1024" Canvas.Left="0" Canvas.Top="0">
+                <Rectangle x:Name="Rectangle" Width="1443.91" Height="1026.78" Canvas.Left="0" Canvas.Top="-0.608643" Stretch="Fill" Fill="#FF01052F"/>
+                <Ellipse x:Name="Ellipse" Width="680.844" Height="680.844" Canvas.Left="1166.16" Canvas.Top="222.997" Stretch="Fill" Fill="#CD95D1D1"/>
+                <Ellipse x:Name="Ellipse_0" Width="680.844" Height="680.844" Canvas.Left="75.2037" Canvas.Top="-300.421" Stretch="Fill" Fill="#808C8CDA"/>
+                <Path x:Name="Path_32" Width="1066.89" Height="802.173" Canvas.Left="188.511" Canvas.Top="161.831" Stretch="Fill" Fill="#558C8CDA" Data="F1 M 218.592,161.831L 1225.32,161.831C 1241.93,161.831 1255.4,175.299 1255.4,191.913L 1255.4,933.923C 1255.4,950.537 1241.93,964.004 1225.32,964.004L 218.592,964.004C 201.978,964.004 188.511,950.537 188.511,933.923L 188.511,191.913C 188.511,175.299 201.978,161.831 218.592,161.831 Z "/>
+            </Canvas>
+        </Canvas>
+    </Grid>
+</Page>

@@ -1,0 +1,37 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net7.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Images\Logo.png" />
+    <None Remove="Images\Phone.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="ApiService">
+      <HintPath>..\..\GritzmanMotorsVS\ApiService\bin\Debug\net7.0\ApiService.dll</HintPath>
+    </Reference>
+    <Reference Include="Model">
+      <HintPath>..\..\GritzmanMotorsVS\ViewModel\bin\Debug\net7.0\Model.dll</HintPath>
+    </Reference>
+    <Reference Include="ViewModel">
+      <HintPath>..\..\GritzmanMotorsVS\ViewModel\bin\Debug\net7.0\ViewModel.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Images\Logo.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Phone.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+
+</Project>
