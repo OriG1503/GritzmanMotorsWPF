@@ -15,6 +15,6 @@
                 <Path x:Name="Path_32" Width="1066.89" Height="802.173" Canvas.Left="188.511" Canvas.Top="161.831" Stretch="Fill" Fill="#558C8CDA" Data="F1 M 218.592,161.831L 1225.32,161.831C 1241.93,161.831 1255.4,175.299 1255.4,191.913L 1255.4,933.923C 1255.4,950.537 1241.93,964.004 1225.32,964.004L 218.592,964.004C 201.978,964.004 188.511,950.537 188.511,933.923L 188.511,191.913C 188.511,175.299 201.978,161.831 218.592,161.831 Z "/>
             </Canvas>
         </Canvas>
-        <Image Source="Images\Logo.png" Margin="180,28,1002,808"/>
+        <Image Source="Images\Logo.png" Panel.ZIndex="9999" Margin="180,28,1002,808"/>
     </Grid>
 </UserControl>

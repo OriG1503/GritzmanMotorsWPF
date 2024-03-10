@@ -3,6 +3,7 @@ using Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -14,7 +15,6 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using ViewModel;
 
 namespace GritzmanMotorsWPF
 {
@@ -48,26 +48,27 @@ namespace GritzmanMotorsWPF
                 Order order = new Order
                 {
                     PriceCode = prc,
-                    CustomerCode = LoginPage.loggedInPerson as Customer,
+                    CustomerCode = (await apiService.GetCustomerList()).Find(x => x.Id == LoginPage.loggedInPerson.Id),
                     EmployeeCode = (await apiService.GetEmployeeList()).Find(x => x.Id == 68),
                     DateOfTreatment = DateOnly.FromDateTime(DateTime.Parse(dpDateOfTreatment.SelectedDate.ToString())),
                     CarReady = false,
                     DateOfOrder = DateTime.Now
                 };
 
-            int orderResult = await apiService.InsertOrder(order);
-            // Display a message based on the registration result
-            if (orderResult == 1)
-            {
-                MessageBox.Show("Your order was added to our database successfully!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
-                //ClearFields();
-                NavigationService.Navigate(new LoginPage());
+                int orderResult = await apiService.InsertOrder(order);
+
+                // Display a message based on the registration result
+                if (orderResult == 1)
+                {
+                    MessageBox.Show("Your order was added to our database successfully!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+                    //ClearFields();
+                    NavigationService.Navigate(new OrderHistoryPage());
+                }
+                else
+                {
+                    MessageBox.Show("An error occurred. Please try again.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
             }
-            else
-            {
-                MessageBox.Show("An error occurred. Please try again.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-        }
             catch (Exception ex)
             {
                 // Handle exceptions, log, or display an error message
@@ -87,6 +88,7 @@ namespace GritzmanMotorsWPF
 
         private async void CarModelComboBox()
         {
+            carModelComboBox.ItemsSource = null;
             ApiService apiService = new ApiService();
             var x = carCompanyComboBox.SelectedItem as string;
 
@@ -102,11 +104,14 @@ namespace GritzmanMotorsWPF
 
         private void CarCompanyComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            price.Content = "Price: ";
             CarModelComboBox();
         }
 
         private async void carModelComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            if (carModelComboBox.SelectedItem == null)
+                return;
             //יש כאן שגיאה כשאני משנה את הבחירה של הסוג רכב עצמו אחרי שכבר בחרתי פעם ראשונה
             ApiService srv = new();
             // Get price

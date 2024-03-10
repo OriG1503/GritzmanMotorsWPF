@@ -47,6 +47,7 @@ namespace GritzmanMotorsWPF
                 NewOrderLabel.Visibility = Visibility.Collapsed;
                 EmployeesLabel.Visibility = Visibility.Visible;
                 DataLabel.Visibility = Visibility.Visible;
+                
             }
         }
 

@@ -14,7 +14,6 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using ApiServiceNM;
 using Model;
-using ViewModel;
 
 namespace GritzmanMotorsWPF
 {

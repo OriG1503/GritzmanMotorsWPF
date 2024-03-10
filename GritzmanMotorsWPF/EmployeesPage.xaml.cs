@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Model;
 
 namespace GritzmanMotorsWPF
 {
@@ -21,6 +22,9 @@ namespace GritzmanMotorsWPF
     /// </summary>
     public partial class EmployeesPage : Page
     {
+        private ApiService apiService = new ApiService();
+        private EmployeeList employeeList; 
+
         public EmployeesPage()
         {
             InitializeComponent();
@@ -29,9 +33,27 @@ namespace GritzmanMotorsWPF
 
         public async void ShowListView()
         {
+            employeeList = await apiService.GetEmployeeList();
+            dataListView.ItemsSource = employeeList;
+        }
+
+        private void AddNewEmployeeClick(object sender, RoutedEventArgs e)
+        {
+            NavigationService.GetNavigationService(this).Navigate(new AddEmployeePage());
+        }
+
+        private async void RemoveEmployeeClick(object sender, RoutedEventArgs e)
+        {
             ApiService apiService = new ApiService();
-            var t = await apiService.GetEmployeeList();
-            dataListView.ItemsSource = t;
+            Employee employee = dataListView.SelectedItem as Employee;
+            if(employee.Id != 68)
+            {
+                apiService.DeleteEmployee(employee);
+                employeeList.Remove(employee);
+                dataListView.ItemsSource = null;
+                dataListView.ItemsSource = employeeList;
+            }
+
         }
     }
 }

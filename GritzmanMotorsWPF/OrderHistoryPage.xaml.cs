@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -15,7 +16,6 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using ViewModel;
 
 namespace GritzmanMotorsWPF
 {
@@ -74,7 +74,7 @@ namespace GritzmanMotorsWPF
             await IsCustomer();
         }
 
-        private void MarkAsDone_Click(object sender, RoutedEventArgs e)
+        private async void MarkAsDone_Click(object sender, RoutedEventArgs e)
         {
             Order selectedOrder = (Order)dataListView.SelectedItem;
             if (selectedOrder != null)
@@ -82,7 +82,7 @@ namespace GritzmanMotorsWPF
                 int id = selectedOrder.Id;
                 int ord = orders.FindIndex(order=>order.Id== id);
                 selectedOrder.CarReady = true;
-                selectedOrder.EmployeeCode = LoginPage.loggedInPerson as Employee;
+                selectedOrder.EmployeeCode = (await apiService.GetEmployeeList()).Find(x => x.Id == LoginPage.loggedInPerson.Id);
                 orders[ord] = selectedOrder;
                 dataListView.ItemsSource = null;
                 dataListView.ItemsSource = orders;

@@ -23,6 +23,12 @@
 
                 </GridView>
             </ListView.View>
+            <ListView.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="Add New Employee" Click="AddNewEmployeeClick"/>
+                    <MenuItem Header="Remove Employee" Click="RemoveEmployeeClick"/>
+                </ContextMenu>
+            </ListView.ContextMenu>
         </ListView>
     </Grid>
 </Page>
