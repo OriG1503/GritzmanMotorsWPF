@@ -25,6 +25,15 @@
                     <GridViewColumn Header="Price" Width="200" DisplayMemberBinding="{Binding Price}" />
                 </GridView>
             </ListView.View>
+            <ListView.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="Add New Car Company" Click="AddNewCarCompanyClick"/>
+                    <MenuItem Header="Add New Car Model" Click="AddNewCarModelClick"/>
+                    <MenuItem Header="Add New Pricing" Click="AddNewPricingClick"/>
+                    <MenuItem Header="Remove Pricing" Click="RemovePricingClick"/>
+                    <MenuItem Header="Update Pricing" Click="UpdatePricingClick"/>
+                </ContextMenu>
+            </ListView.ContextMenu>
         </ListView>
     </Grid>
 </Page>

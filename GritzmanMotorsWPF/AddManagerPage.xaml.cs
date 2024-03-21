@@ -3,7 +3,6 @@ using Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net.Http;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -20,20 +19,20 @@ using System.Windows.Shapes;
 namespace GritzmanMotorsWPF
 {
     /// <summary>
-    /// Interaction logic for AddEmployeePage.xaml
+    /// Interaction logic for AddManagerPage.xaml
     /// </summary>
-    public partial class AddEmployeePage : Page
+    public partial class AddManagerPage : Page
     {
         private readonly Regex nameRegex = new Regex(@"^[A-Z][a-z]{2,9}$");
-        private SpecializationList lst;
+        private RoleList lst;
 
-        public AddEmployeePage()
+        public AddManagerPage()
         {
             InitializeComponent();
-            SpecializationComboBox();
+            RoleComboBox();
         }
 
-        private async void AddNewEmployee_Click(object sender, RoutedEventArgs e)
+        private async void AddNewManager_Click(object sender, RoutedEventArgs e)
         {
             try
             {
@@ -42,12 +41,12 @@ namespace GritzmanMotorsWPF
                 DateOnly dateOfBirth = DateOnly.FromDateTime((DateTime)dpDateOfBirth.SelectedDate);
 
                 // Gather user input (you should validate and sanitize the input)
-                Employee employee = new Employee
+                Manager manager = new Manager
                 {
                     FirstName = firstName,
                     LastName = lastName,
                     DateOfBirth = dateOfBirth,
-                    SpecializationCode = lst.Find(x => x.SpecializationName == specializationComboBox.SelectedItem)
+                    RoleCode = lst.Find(x => x.RoleName == roleComboBox.SelectedItem)
                 };
 
                 // Call the API to register the person
@@ -76,15 +75,14 @@ namespace GritzmanMotorsWPF
                     return;
                 }
 
-
-                int registrationResult = await apiService.InsertEmployee(employee);
+                int registrationResult = await apiService.InsertManager(manager);
 
                 // Display a message based on the registration result
                 if (registrationResult == 1)
                 {
                     MessageBox.Show("Registration successful!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
                     ClearFields();
-                    NavigationService.GetNavigationService(this).Navigate(new EmployeesPage());
+                    NavigationService.GetNavigationService(this).Navigate(new ManagersPage());
 
                 }
                 else
@@ -99,11 +97,13 @@ namespace GritzmanMotorsWPF
             }
         }
 
-        private async void SpecializationComboBox()
+        private async void RoleComboBox()
         {
             ApiService apiService = new ApiService();
-            lst = (await (apiService.GetSpecializationList()));
-            specializationComboBox.ItemsSource = lst.Select(x => x.SpecializationName);
+            lst = (await (apiService.GetRoleList()));
+            Role ceo = lst.Find(x => x.RoleName == "CEO");
+            lst.Remove(ceo);
+            roleComboBox.ItemsSource = lst.Select(x => x.RoleName);
         }
 
         private void ClearFields()
@@ -112,13 +112,11 @@ namespace GritzmanMotorsWPF
             txtFirstName.Text = string.Empty;
             txtLastName.Text = string.Empty;
             dpDateOfBirth.SelectedDate = null; // Clear the DatePicker
-
         }
 
         private bool IsValidName(string name)
         {
             return nameRegex.IsMatch(name);
         }
-
     }
 }

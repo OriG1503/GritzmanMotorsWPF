@@ -53,7 +53,6 @@ namespace GritzmanMotorsWPF
                 dataListView.ItemsSource = null;
                 dataListView.ItemsSource = employeeList;
             }
-
         }
     }
 }

@@ -47,7 +47,7 @@ namespace GritzmanMotorsWPF
                 NewOrderLabel.Visibility = Visibility.Collapsed;
                 EmployeesLabel.Visibility = Visibility.Visible;
                 DataLabel.Visibility = Visibility.Visible;
-                
+                ManagersLabel.Visibility = Visibility.Visible;
             }
         }
 
@@ -93,5 +93,10 @@ namespace GritzmanMotorsWPF
             NavigationService.GetNavigationService(this).Navigate(new DataPage());
         }
 
+        private void ManagersPage_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            NavigationService.GetNavigationService(this).Navigate(new ManagersPage());
+
+        }
     }
 }

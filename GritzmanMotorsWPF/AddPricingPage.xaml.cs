@@ -2,9 +2,10 @@
 using Model;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
-using System.Net.Http;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -19,53 +20,57 @@ using System.Windows.Shapes;
 namespace GritzmanMotorsWPF
 {
     /// <summary>
-    /// Interaction logic for NewOrderPage.xaml
+    /// Interaction logic for AddPricingPage.xaml
     /// </summary>
-    public partial class NewOrderPage : Page
+    public partial class AddPricingPage : Page
     {
+
         private CarCompanyList lst;
-        private Pricing prc;
-        public NewOrderPage()
+        private CarModelList lstCarModel;
+        private readonly Regex priceRegex = new Regex(@"^\d+(?:\.\d+)?$");
+
+
+        public AddPricingPage()
         {
             InitializeComponent();
             CarCompanyComboBox();
         }
 
-        private async void CreateOrder_Click(object sender, RoutedEventArgs e)
+        private async void AddNewPricing_Click(object sender, RoutedEventArgs e)
         {
             try
             {
+                // Call the API to register the person
                 ApiService apiService = new ApiService();
-                CarCompany selectedCarCompany = carCompanyComboBox.SelectedItem as CarCompany;
-                CarModel selectedCarModel = carModelComboBox.SelectedItem as CarModel;
 
-                if (dpDateOfTreatment.SelectedDate == null || dpDateOfTreatment.SelectedDate < DateTime.Now)
+                lstCarModel = await apiService.GetCarModelList();
+
+                if (!IsValidPrice(txtPrice.Text))
                 {
-                    MessageBox.Show("Invalid date. Treatment date can only be in the future.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show("Invalid price. It should be greater than 0 and be only '.' and digits.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                     return;
                 }
 
-                Order order = new Order
+                Pricing pricing = new Pricing
                 {
-                    PriceCode = prc,
-                    CustomerCode = (await apiService.GetCustomerList()).Find(x => x.Id == LoginPage.loggedInPerson.Id),
-                    EmployeeCode = (await apiService.GetEmployeeList()).Find(x => x.Id == 68),
-                    DateOfTreatment = DateOnly.FromDateTime(DateTime.Parse(dpDateOfTreatment.SelectedDate.ToString())),
-                    CarReady = false,
-                    DateOfOrder = DateTime.Now
+                    ModelCode = (await apiService.GetCarModelList()).Find(x => x.CarModelName == carModelComboBox.SelectedItem.ToString()),
+
+                    Price = double.Parse(txtPrice.Text.ToString())
                 };
 
-                int orderResult = await apiService.InsertOrder(order);
+
+                int registrationResult = await apiService.InsertPricing(pricing);
 
                 // Display a message based on the registration result
-                if (orderResult == 1)
+                if (registrationResult == 1)
                 {
-                    MessageBox.Show("Your order was added to our database successfully!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
-                    NavigationService.Navigate(new OrderHistoryPage());
+                    MessageBox.Show("Added successfuly!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+                    ClearFields();
+                    NavigationService.GetNavigationService(this).Navigate(new PricingPage());
                 }
                 else
                 {
-                    MessageBox.Show("An error occurred. Please try again.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show("Adding failed. Please try again.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
             catch (Exception ex)
@@ -94,6 +99,7 @@ namespace GritzmanMotorsWPF
                 .Where(z => z.CompanyCode.Id == lst
                 // Find a singular item based on a lambda condition
                 .Find(q => q.CarCompanyName == x)!.Id);
+           
             carModelComboBox.ItemsSource = y
                 // Map enumerable with a callback fn based on the lambda condition
                 .Select(x => x.CarModelName);
@@ -101,20 +107,18 @@ namespace GritzmanMotorsWPF
 
         private void CarCompanyComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            price.Content = "Price: ";
             CarModelComboBox();
         }
 
-        private async void carModelComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void ClearFields()
         {
-            if (carModelComboBox.SelectedItem == null)
-                return;
-            ApiService srv = new();
-            // Get price
-            prc = (await srv.GetPricingList()).Find(x => x.ModelCode.CarModelName == carModelComboBox.SelectedItem.ToString());
-            if (prc != null)
-                price.Content = "Price: " + prc!.Price;
+            // Clear the textboxes and other fields
+            txtPrice.Text = string.Empty;
         }
 
+        private bool IsValidPrice(string price)
+        {
+            return priceRegex.IsMatch(price);
+        }
     }
 }

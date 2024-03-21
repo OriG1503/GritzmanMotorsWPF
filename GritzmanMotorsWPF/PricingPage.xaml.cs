@@ -1,6 +1,8 @@
 ﻿using ApiServiceNM;
+using Model;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -25,6 +27,19 @@ namespace GritzmanMotorsWPF
         {
             InitializeComponent();
             ShowListView();
+            IsManager();
+        }
+
+        public async Task IsManager()
+        {
+            ManagerList managerList = null;
+            ApiService apiService = new ApiService();
+            managerList = await apiService.GetManagerList();
+            Manager manager = managerList.Find(x => x.FirstName == LoginPage.loggedInPerson.FirstName && x.LastName == LoginPage.loggedInPerson.LastName);
+            if (manager == null)
+            {
+                dataListView.ContextMenu.Visibility = Visibility.Collapsed;
+            }
         }
 
         public async void ShowListView()
@@ -32,6 +47,39 @@ namespace GritzmanMotorsWPF
             ApiService apiService = new ApiService();
             var t = await apiService.GetPricingList();
             dataListView.ItemsSource = t;
+        }
+
+        private void UpdatePricingClick(object sender, RoutedEventArgs e)
+        {
+            NavigationService.GetNavigationService(this).Navigate(new UpdatePricingPage());
+        }
+
+        private async void RemovePricingClick(object sender, RoutedEventArgs e)
+        {
+            ApiService apiService = new ApiService();
+            Pricing price = dataListView.SelectedItem as Pricing;
+            apiService.DeletePricing(price);
+
+            var t = await apiService.GetPricingList();
+            t.Remove(price);
+
+            dataListView.ItemsSource = null;
+            dataListView.ItemsSource = t;
+            
+        }
+        private void AddNewPricingClick(object sender, RoutedEventArgs e)
+        {
+            NavigationService.GetNavigationService(this).Navigate(new AddPricingPage());
+        }
+
+        private void AddNewCarCompanyClick(object sender, RoutedEventArgs e)
+        {
+            NavigationService.GetNavigationService(this).Navigate(new AddNewCarCompanyPage());
+        }
+
+        private void AddNewCarModelClick(object sender, RoutedEventArgs e)
+        {
+            NavigationService.GetNavigationService(this).Navigate(new AddCarModelPage());
         }
     }
 }
