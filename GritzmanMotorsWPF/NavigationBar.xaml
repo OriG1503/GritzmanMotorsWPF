@@ -14,6 +14,5 @@
         <Label x:Name="OrderHistoryLabel" Content="Order History" Style="{StaticResource NavigationBarLabelStyle}" MouseDown="OrderHistoryPage_MouseDown" Margin="0,0,20,0"/>
         <Label x:Name="EmployeesLabel" Content="Employees" Style="{StaticResource NavigationBarLabelStyle}" MouseDown="EmployeesPage_MouseDown" Visibility="Collapsed" Margin="0,0,20,0"/>
         <Label x:Name="ManagersLabel" Content="Managers" Style="{StaticResource NavigationBarLabelStyle}" MouseDown="ManagersPage_MouseDown" Visibility="Collapsed" Margin="0,0,20,0"/>
-        <Label x:Name="DataLabel" Content="Data" Style="{StaticResource NavigationBarLabelStyle}" MouseDown="DataPage_MouseDown" Visibility="Collapsed" Margin="0,0,20,0"/>
     </StackPanel>
 </UserControl>

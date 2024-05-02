@@ -88,11 +88,6 @@ namespace GritzmanMotorsWPF
             NavigationService.GetNavigationService(this).Navigate(new EmployeesPage());
         }
 
-        private void DataPage_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            NavigationService.GetNavigationService(this).Navigate(new DataPage());
-        }
-
         private void ManagersPage_MouseDown(object sender, MouseButtonEventArgs e)
         {
             NavigationService.GetNavigationService(this).Navigate(new ManagersPage());
