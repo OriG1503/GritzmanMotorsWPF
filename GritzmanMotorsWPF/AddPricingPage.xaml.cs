@@ -24,11 +24,9 @@ namespace GritzmanMotorsWPF
     /// </summary>
     public partial class AddPricingPage : Page
     {
-
         private CarCompanyList lst;
         private CarModelList lstCarModel;
         private readonly Regex priceRegex = new Regex(@"^\d+(?:\.\d+)?$");
-
 
         public AddPricingPage()
         {
@@ -36,8 +34,26 @@ namespace GritzmanMotorsWPF
             CarCompanyComboBox();
         }
 
+        private void CarCompanyComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            CarModelComboBox();
+        }
+
+        private void ClearFields()
+        {
+            // Clear the textboxes and other fields
+            txtPrice.Text = string.Empty;
+        }
+
+        private bool IsValidPrice(string price)
+        {
+            return priceRegex.IsMatch(price);
+        }
+
         private async void AddNewPricing_Click(object sender, RoutedEventArgs e)
         {
+            //הפעולה מוסיפה מחיר חדש למודל רכב ומנווטת לדף המחירון אם ההוספה הצליחה, אחרת מציגה הודעת שגיאה
+
             try
             {
                 // Call the API to register the person
@@ -47,7 +63,8 @@ namespace GritzmanMotorsWPF
 
                 if (!IsValidPrice(txtPrice.Text))
                 {
-                    MessageBox.Show("Invalid price. It should be greater than 0 and be only '.' and digits.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show("Invalid price. It should be greater than 0 and be only '.' and digits.",
+                        "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                     return;
                 }
 
@@ -82,6 +99,8 @@ namespace GritzmanMotorsWPF
 
         private async void CarCompanyComboBox()
         {
+            //הפעולה מציבה את רשימת חברות הרכב הקיימות במערכת בתיבת הרשימה הנפתחת של חברות הרכב בממשק המשתמש
+
             ApiService apiService = new ApiService();
             var x = (await (apiService.GetCarCompanyList())).Select(x => x.CarCompanyName);
             lst = (await (apiService.GetCarCompanyList()));
@@ -90,6 +109,7 @@ namespace GritzmanMotorsWPF
 
         private async void CarModelComboBox()
         {
+            //הפעולה מציבה את רשימת דגמי הרכב של החברה שנבחרה בתיבת הרשימה הנפתחת של חברות הרכב בממשק המשתמש
             carModelComboBox.ItemsSource = null;
             ApiService apiService = new ApiService();
             var x = carCompanyComboBox.SelectedItem as string;
@@ -105,20 +125,5 @@ namespace GritzmanMotorsWPF
                 .Select(x => x.CarModelName);
         }
 
-        private void CarCompanyComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            CarModelComboBox();
-        }
-
-        private void ClearFields()
-        {
-            // Clear the textboxes and other fields
-            txtPrice.Text = string.Empty;
-        }
-
-        private bool IsValidPrice(string price)
-        {
-            return priceRegex.IsMatch(price);
-        }
     }
 }

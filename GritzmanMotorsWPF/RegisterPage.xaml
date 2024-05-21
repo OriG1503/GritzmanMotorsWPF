@@ -23,7 +23,8 @@
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,120,0,0">
             <Image Source="Images/Logo.png" Width="200" Height="204" Margin="0,-10,0,-30"/>
             <!-- Adjust Width, Height, and Margin accordingly -->
-            <Label Content="First Name - Username:" FontSize="24" Foreground="#66CDAA" Margin="0,0,0,5" FontFamily="Segoe UI" FontWeight="Bold"/>
+            <Label Content="First Name - Username:" FontSize="24" Foreground="#66CDAA" 
+                   Margin="0,0,0,5" FontFamily="Segoe UI" FontWeight="Bold"/>
             <Border Width="300" Height="40" CornerRadius="20" Background="#F2F2F2" Margin="0,0,0,15">
                 <TextBox x:Name="txtFirstName" Width="290" Height="40" Margin="5" FontSize="20" Text="">
                     <TextBox.Foreground>
@@ -39,7 +40,8 @@
                 </TextBox>
             </Border>
 
-            <Label Content="Last Name - Password:" FontSize="24" Foreground="#66CDAA" Margin="0,0,0,5" FontFamily="Segoe UI" FontWeight="Bold"/>
+            <Label Content="Last Name - Password:" FontSize="24" 
+                   Foreground="#66CDAA" Margin="0,0,0,5" FontFamily="Segoe UI" FontWeight="Bold"/>
             <Border Width="300" Height="40" CornerRadius="20" Background="#F2F2F2" Margin="0,0,0,15">
                 <TextBox x:Name="txtLastName" Width="290" Height="40" Margin="5" FontSize="20" Text="">
                     <TextBox.Foreground>
@@ -55,12 +57,15 @@
                 </TextBox>
             </Border>
 
-            <Label Content="Date Of Birth:" FontSize="24" Foreground="#66CDAA" Margin="0,0,0,5" FontFamily="Segoe UI" FontWeight="Bold"/>
+            <Label Content="Date Of Birth:" FontSize="24" Foreground="#66CDAA"
+                   Margin="0,0,0,5" FontFamily="Segoe UI" FontWeight="Bold"/>
             <Border Width="300" Height="40" CornerRadius="20" Background="#F2F2F2" Margin="0,0,0,15">
-                <DatePicker x:Name="dpDateOfBirth" Width="290" Height="40" Margin="5" FontSize="20" Style="{StaticResource CustomDatePickerStyle}" />
+                <DatePicker x:Name="dpDateOfBirth" Width="290" Height="40" 
+                            Margin="5" FontSize="20" Style="{StaticResource CustomDatePickerStyle}" />
             </Border>
 
-            <Label Content="Phone Number:" FontSize="24" Foreground="#66CDAA" Margin="0,0,0,5" FontFamily="Segoe UI" FontWeight="Bold"/>
+            <Label Content="Phone Number:" FontSize="24" Foreground="#66CDAA" 
+                   Margin="0,0,0,5" FontFamily="Segoe UI" FontWeight="Bold"/>
             <Border Width="300" Height="40" CornerRadius="20" Background="#F2F2F2" Margin="0,0,0,15">
                 <TextBox x:Name="txtPhoneNumber" Width="290" Height="40" Margin="5" FontSize="20" Text="">
                     <TextBox.Foreground>
@@ -78,7 +83,8 @@
 
 
 
-            <Button Content="Register" Width="180" Height="50" FontSize="24" Foreground="White" Click="Register_Click" Margin="0,10,0,0">
+            <Button Content="Register" Width="180" Height="50" FontSize="24"
+                    Foreground="White" Click="Register_Click" Margin="0,10,0,0">
                 <Button.Style>
                     <Style TargetType="{x:Type Button}">
                         <Setter Property="Background" Value="#66CDAA"/>

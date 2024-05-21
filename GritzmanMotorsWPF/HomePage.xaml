@@ -14,14 +14,21 @@
         <Image Source="Images/Phone.png" Margin="720,318,230,230"/>
 
         <!-- Display Person Information -->
-        <StackPanel HorizontalAlignment="Left" VerticalAlignment="Top" Margin="353,446,0,0" Height="220">
-            <Label x:Name="firstNameLabel" Content="First Name: " FontSize="24" Foreground="#66CDAA" FontFamily="Segoe UI" FontWeight="Bold" Margin="0,0,0,0"/>
-            <Label x:Name="lastNameLabel" Content="Last Name: " FontSize="24" Foreground="#66CDAA" FontFamily="Segoe UI" FontWeight="Bold" Margin="0,40,0,0"/>
-            <Label x:Name="BirthDateLabel" Content="Date Of Birth: " FontSize="24" Foreground="#66CDAA" FontFamily="Segoe UI" FontWeight="Bold" Margin="0,40,0,0"/>
+        <StackPanel HorizontalAlignment="Left" VerticalAlignment="Top" Margin="353,346,0,0" Height="389" Width="457">
+            <Label x:Name="firstNameLabel" Content="First Name: " 
+                   FontSize="24" Foreground="#66CDAA" FontFamily="Segoe UI" FontWeight="Bold" Margin="0,0,0,0"/>
+            <Label x:Name="lastNameLabel" Content="Last Name: " 
+                   FontSize="24" Foreground="#66CDAA" FontFamily="Segoe UI" FontWeight="Bold" Margin="0,40,0,0"/>
+            <Label x:Name="BirthDateLabel" Content="Date Of Birth: " 
+                   FontSize="24" Foreground="#66CDAA" FontFamily="Segoe UI" FontWeight="Bold" Margin="0,40,0,0"/>
+            <Label x:Name="sumOfAllOrdersLabel" Content="Sum Of All Orders: " Visibility="Collapsed"
+       FontSize="24" Foreground="#66CDAA" FontFamily="Segoe UI" FontWeight="Bold" Margin="0,40,0,0"/>
+            <Label x:Name="averageOfAllOrdersLabel" Content="Average Of All Orders: " Visibility="Collapsed" 
+        FontSize="24" Foreground="#66CDAA" FontFamily="Segoe UI" FontWeight="Bold" Margin="0,40,0,0"/>
         </StackPanel>
 
-        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,874,0,0" Height="50">
-            <Button Content="Logout" Width="180" Height="50" FontSize="24" Foreground="White" Click="Logout_Click" Margin="0,0,0,50">
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,400" Height="50">
+            <Button Content="Logout" Width="180" Height="50" FontSize="24" Foreground="White" Click="Logout_Click">
                 <Button.Style>
                     <Style TargetType="{x:Type Button}">
                         <Setter Property="Background" Value="#66CDAA"/>
@@ -38,6 +45,5 @@
                 </Button.Style>
             </Button>
         </StackPanel>
-
     </Grid>
 </Page>

@@ -31,11 +31,13 @@ namespace GritzmanMotorsWPF
 
         private void RedirectToRegisterPage(object sender, RoutedEventArgs e)
         {
+            //הפעולה מעבירה לעמוד חדש
             NavigationService.Navigate(new RegisterPage());
         }
 
         public async Task<Person> SpecificPerson(string username, string password)
         {
+            //הפעולה  מתבצעת אסינכרונית על ידי התחברות לאיי פי איי כדי לקבל רשימה של אנשים, ולאחר מכן מחפשת אדם ספציפי על פי שם משתמש וסיסמה
             ApiService apiService = new ApiService();
             PersonList personList = await apiService.GetPersonList();
             return personList.Find(x => x.FirstName == username && x.LastName == password);
@@ -43,6 +45,7 @@ namespace GritzmanMotorsWPF
 
         private async void Login_Click(object sender, RoutedEventArgs e)
         {
+            //הפעולה בודקת את תקינות שם המשתמש והסיסמה, ואם הם נכונים, מבצעת התחברות ומעבירה לדף הבית, אחרת מציגה הודעת שגיאה
             try
             { 
                 string username = txtUsername.Text;
@@ -60,7 +63,8 @@ namespace GritzmanMotorsWPF
                 else
                 {
                     // Unsuccessful login, show an error message or handle accordingly
-                    MessageBox.Show("Invalid username or password. Please try again.", "Login Failed", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show("Invalid username or password. Please try again.", "Login Failed",
+                        MessageBoxButton.OK, MessageBoxImage.Error);
                     ClearFields();
 
                 }

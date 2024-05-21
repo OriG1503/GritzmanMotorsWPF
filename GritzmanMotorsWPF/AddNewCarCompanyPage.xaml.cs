@@ -28,19 +28,24 @@ namespace GritzmanMotorsWPF
             InitializeComponent();
         }
 
+        private void ClearFields()
+        {
+            // Clear the textboxes and other fields
+            txtCarCompanyName.Text = string.Empty;
+        }
+
         private async void AddNewCarCompnay_Click(object sender, RoutedEventArgs e)
         {
+            //הפעולה מוסיפה חברת רכב חדשה למערכת ומנווטת לדף המחירון אם הוספת החברה הצליחה, אחרת מציגה הודעת שגיאה
             try
             {
                 CarCompany carCompany = new CarCompany
                 {
                     CarCompanyName = txtCarCompanyName.Text
                 };
-
                 // Call the API to register the person
                 ApiService apiService = new ApiService();
 
-               
                 int registrationResult = await apiService.InsertCarCompany(carCompany);
 
                 // Display a message based on the registration result
@@ -51,21 +56,13 @@ namespace GritzmanMotorsWPF
                     NavigationService.GetNavigationService(this).Navigate(new PricingPage());
                 }
                 else
-                {
                     MessageBox.Show("Adding failed. Please try again.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                }
             }
             catch (Exception ex)
             {
                 // Handle exceptions, log, or display an error message
                 MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-        }
-
-        private void ClearFields()
-        {
-            // Clear the textboxes and other fields
-            txtCarCompanyName.Text = string.Empty;
         }
     }
 }

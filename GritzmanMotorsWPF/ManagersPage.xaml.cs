@@ -20,7 +20,6 @@ namespace GritzmanMotorsWPF
     
     public partial class ManagersPage : Page
     {
-
         private ApiService apiService = new ApiService();
         private ManagerList managerList;
         public ManagersPage()
@@ -37,19 +36,18 @@ namespace GritzmanMotorsWPF
 
         private void AddNewManagerClick(object sender, RoutedEventArgs e)
         {
+            //הפעולה בודקת האם המנהל הוא המנכ"ל ואם כן אז היא מאפשרת לו להוסיף מנהל חדש
             if(LoginPage.loggedInPerson.Id==1)
                 NavigationService.GetNavigationService(this).Navigate(new AddManagerPage());
             else
                 MessageBox.Show("You Are Not The CEO!.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-
         }
 
         private async void RemoveManagerClick(object sender, RoutedEventArgs e)
         {
-
+            //הפעולה מוחקת מנהל מהמערכת אם המשתמש המחובר הוא המנכ"ל הראשי, ומציגה הודעת שגיאה אחרת
             if (LoginPage.loggedInPerson.Id != 1)
                 MessageBox.Show("You Are Not The CEO!.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-
             else
             {
                 ApiService apiService = new ApiService();
@@ -62,7 +60,6 @@ namespace GritzmanMotorsWPF
                     dataListView.ItemsSource = managerList;
                 }
             }
-            
         }
     }
 }

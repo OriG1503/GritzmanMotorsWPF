@@ -40,6 +40,7 @@ namespace GritzmanMotorsWPF
 
         private async void Register_Click(object sender, RoutedEventArgs e)
         {
+            //הפעולה בודקת את קלט המשתמש, מוסיפה אותו למערכת דרך האיי פי איי, במידה וההרשמה צלחה מציגה הודעת הצלחה ומנקה את שדות הקלט, או מציגה הודעת שגיאה אם ההרשמה נכשלה
             try
             {
                 string firstName = txtFirstName.Text;
@@ -61,14 +62,16 @@ namespace GritzmanMotorsWPF
 
                 if (!IsValidName(firstName))
                 {
-                    MessageBox.Show("Invalid first name. First letter should be capital, and it should be between 3 - 10 letters.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show("Invalid first name. First letter should be capital," +
+                        " and it should be between 3 - 10 letters.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                     return;
                 }
 
                 // Validate last name
                 if (!IsValidName(lastName))
                 {
-                    MessageBox.Show("Invalid last name.It should be longer than 0 letters and no longer than 10 letters.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show("Invalid last name.It should be longer than 0 letters" +
+                        " and no longer than 10 letters.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                     return;
                 }
 
@@ -78,13 +81,15 @@ namespace GritzmanMotorsWPF
 
                 if (dpDateOfBirth.SelectedDate == null || dpDateOfBirth.SelectedDate > minDateOfBirth)
                 {
-                    MessageBox.Show("Invalid date of birth. Age should be at least 17 years.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show("Invalid date of birth. Age should be at least 17 years."
+                        , "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                     return;
                 }
 
                 if (!phoneNumberRegex.IsMatch(phoneNumber))
                 {
-                    MessageBox.Show("Invalid phone number.It should be longer than 10 digits and start with the digit 0.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show("Invalid phone number.It should be longer than 10 digits" +
+                        " and start with the digit 0.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                     return;
                 }
 
@@ -113,8 +118,7 @@ namespace GritzmanMotorsWPF
             // Clear the textboxes and other fields
             txtFirstName.Text = string.Empty;
             txtLastName.Text = string.Empty;
-            dpDateOfBirth.SelectedDate = null; // Clear the DatePicker
-                                              
+            dpDateOfBirth.SelectedDate = null; // Clear the DatePicker                                   
         }
 
         private bool IsValidName(string name)

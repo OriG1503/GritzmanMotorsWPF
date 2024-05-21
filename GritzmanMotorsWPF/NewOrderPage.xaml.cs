@@ -33,6 +33,7 @@ namespace GritzmanMotorsWPF
 
         private async void CreateOrder_Click(object sender, RoutedEventArgs e)
         {
+            //הפעולה יוצרת הזמנה חדשה ומטפלת בהוספתה למסד הנתונים דרך האיי פי איי, מציגה הודעות הצלחה או שגיאה ומנווטת לדף היסטוריית הזמנות
             try
             {
                 ApiService apiService = new ApiService();
@@ -41,7 +42,8 @@ namespace GritzmanMotorsWPF
 
                 if (dpDateOfTreatment.SelectedDate == null || dpDateOfTreatment.SelectedDate < DateTime.Now)
                 {
-                    MessageBox.Show("Invalid date. Treatment date can only be in the future.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show("Invalid date. Treatment date can only be in the future.", 
+                        "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                     return;
                 }
 
@@ -60,23 +62,27 @@ namespace GritzmanMotorsWPF
                 // Display a message based on the registration result
                 if (orderResult == 1)
                 {
-                    MessageBox.Show("Your order was added to our database successfully!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+                    MessageBox.Show("Your order was added to our database successfully!", 
+                        "Success", MessageBoxButton.OK, MessageBoxImage.Information);
                     NavigationService.Navigate(new OrderHistoryPage());
                 }
                 else
                 {
-                    MessageBox.Show("An error occurred. Please try again.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show("An error occurred. Please try again.", "Error", 
+                        MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
             catch (Exception ex)
             {
                 // Handle exceptions, log, or display an error message
-                MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show($"An error occurred: {ex.Message}", "Error", 
+                    MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
         private async void CarCompanyComboBox()
         {
+            //הפעולה מציגה את שמות חברות הרכב בתוך קומבו בוקס על פי נתונים שנשלפים מהאיי פי איי ומאפשרת בחירה מתוך האפשרויות המוצגות
             ApiService apiService = new ApiService();
             var x = (await (apiService.GetCarCompanyList())).Select(x => x.CarCompanyName);
             lst = (await (apiService.GetCarCompanyList()));
@@ -85,6 +91,7 @@ namespace GritzmanMotorsWPF
 
         private async void CarModelComboBox()
         {
+            //הפעולה מציגה בקומבו בוקס את שמות דגמי הרכב של החברה שנבחרה על ידי המשתמש
             carModelComboBox.ItemsSource = null;
             ApiService apiService = new ApiService();
             var x = carCompanyComboBox.SelectedItem as string;
@@ -107,6 +114,7 @@ namespace GritzmanMotorsWPF
 
         private async void carModelComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            //הפעולה מציגה את המחיר של הדגם הנבחר בקומבו בוקס בתוך התווית
             if (carModelComboBox.SelectedItem == null)
                 return;
             ApiService srv = new();

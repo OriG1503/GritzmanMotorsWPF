@@ -28,6 +28,7 @@ namespace GritzmanMotorsWPF
         public static Person loggeduser = null;
         ManagerList managerList;
         EmployeeList employeeList;
+
         public NavigationBar()
         {
             InitializeComponent();
@@ -38,6 +39,7 @@ namespace GritzmanMotorsWPF
 
         public async Task IsManager()
         {
+            //הפעולה בודקת אם המשתמש הנוכחי הוא מנהל במערכת ובמקרה וכן, היא משנה את נראות התוויות
             managerList = null;
             ApiService apiService = new ApiService();
             managerList = await apiService.GetManagerList();
@@ -46,13 +48,13 @@ namespace GritzmanMotorsWPF
             {
                 NewOrderLabel.Visibility = Visibility.Collapsed;
                 EmployeesLabel.Visibility = Visibility.Visible;
-                DataLabel.Visibility = Visibility.Visible;
                 ManagersLabel.Visibility = Visibility.Visible;
             }
         }
 
         public async Task IsEmployee()
         {
+            //הפעולה בודקת אם המשתמש הנוכחי הוא עובד במערכת ובמקרה וכן, היא משנה את נראות התוויות
             employeeList = null;
             ApiService apiService = new ApiService();
             employeeList = await apiService.GetEmployeeList();

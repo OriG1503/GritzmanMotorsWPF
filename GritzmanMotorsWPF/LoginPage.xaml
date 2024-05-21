@@ -15,7 +15,8 @@
             <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,50,0,0">
                 <Image Source="Images\Logo.png" Width="200" Height="204" Margin="0,-10,0,-30"/>
 
-                <Label Content="Username:" FontSize="24" Foreground="#66CDAA"  Margin="0,0,0,5" FontFamily="Segoe UI" FontWeight="Bold"/>
+                <Label Content="Username:" FontSize="24" Foreground="#66CDAA"  Margin="0,0,0,5"
+                       FontFamily="Segoe UI" FontWeight="Bold"/>
                 <Border Width="300" Height="40" CornerRadius="20" Background="#F2F2F2" Margin="0,0,0,15">
                     <TextBox x:Name="txtUsername" Width="290" Height="40" Margin="5" FontSize="20">
                         <TextBox.Foreground>
@@ -31,7 +32,8 @@
                     </TextBox>
                 </Border>
 
-                <Label Content="Password:" FontSize="24" Foreground="#66CDAA" Margin="0,0,0,5" FontFamily="Segoe UI" FontWeight="Bold"/>
+                <Label Content="Password:" FontSize="24" Foreground="#66CDAA" 
+                       Margin="0,0,0,5" FontFamily="Segoe UI" FontWeight="Bold"/>
                 <Border Width="300" Height="40" CornerRadius="20" Background="#F2F2F2" Margin="0,0,0,15">
                     <PasswordBox x:Name="txtPassword" Width="290" Height="40" Margin="5" FontSize="20">
                         <PasswordBox.Foreground>
@@ -47,7 +49,8 @@
                     </PasswordBox>
                 </Border>
 
-                <Button Content="Login" Width="180" Height="50" FontSize="24" Foreground="White" Click="Login_Click" Margin="0,10,0,0">
+                <Button Content="Login" Width="180" Height="50" 
+                        FontSize="24" Foreground="White" Click="Login_Click" Margin="0,10,0,0">
     <Button.Style>
         <Style TargetType="{x:Type Button}">
             <Setter Property="Background" Value="#66CDAA"/>

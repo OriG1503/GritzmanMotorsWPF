@@ -32,10 +32,12 @@ namespace GritzmanMotorsWPF
 
         public async Task IsManager()
         {
+            //הפעולה בודקת אם המשתמש המחובר הוא מנהל במערכת ומשנה את רמת הנראות של תפריט ההקשר בהתאם
             ManagerList managerList = null;
             ApiService apiService = new ApiService();
             managerList = await apiService.GetManagerList();
-            Manager manager = managerList.Find(x => x.FirstName == LoginPage.loggedInPerson.FirstName && x.LastName == LoginPage.loggedInPerson.LastName);
+            Manager manager = managerList.Find(x => x.FirstName == LoginPage.loggedInPerson.FirstName
+            && x.LastName == LoginPage.loggedInPerson.LastName);
             if (manager == null)
             {
                 dataListView.ContextMenu.Visibility = Visibility.Collapsed;
@@ -44,6 +46,7 @@ namespace GritzmanMotorsWPF
 
         public async void ShowListView()
         {
+            //הפעולה מאתחלת את הליסט וויו
             ApiService apiService = new ApiService();
             var t = await apiService.GetPricingList();
             dataListView.ItemsSource = t;
@@ -56,6 +59,7 @@ namespace GritzmanMotorsWPF
 
         private async void RemovePricingClick(object sender, RoutedEventArgs e)
         {
+            //הפעולה מופעלת כאשר המנהל לוחץ על כפתור המחיקה בממשק המשתמש כדי להסיר מחיר מרשימת המחירים ומסירה אותו מן הרשימה
             ApiService apiService = new ApiService();
             Pricing price = dataListView.SelectedItem as Pricing;
             apiService.DeletePricing(price);

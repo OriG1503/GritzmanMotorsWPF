@@ -44,6 +44,7 @@ namespace GritzmanMotorsWPF
 
         private async void RemoveEmployeeClick(object sender, RoutedEventArgs e)
         {
+            //הפעולה מוחקת עובד מרשימת העובדים ומעדכנת את התצוגה
             ApiService apiService = new ApiService();
             Employee employee = dataListView.SelectedItem as Employee;
             if(employee.Id != 68)

@@ -33,8 +33,30 @@ namespace GritzmanMotorsWPF
             SpecializationComboBox();
         }
 
+        private void ClearFields()
+        {
+            // Clear the textboxes and other fields
+            txtFirstName.Text = string.Empty;
+            txtLastName.Text = string.Empty;
+            dpDateOfBirth.SelectedDate = null; // Clear the DatePicker
+
+        }
+
+        private bool IsValidName(string name)
+        {
+            return nameRegex.IsMatch(name);
+        }
+
+        private async void SpecializationComboBox()
+        {
+            ApiService apiService = new ApiService();
+            lst = (await (apiService.GetSpecializationList()));
+            specializationComboBox.ItemsSource = lst.Select(x => x.SpecializationName);
+        }
+
         private async void AddNewEmployee_Click(object sender, RoutedEventArgs e)
         {
+            //הפעולה מוסיפה עובד חדש למערכת בהתאם לפרטים שהוזנו על ידי המשתמש בממשק המשתמש
             try
             {
                 string firstName = txtFirstName.Text;
@@ -55,14 +77,16 @@ namespace GritzmanMotorsWPF
 
                 if (!IsValidName(firstName))
                 {
-                    MessageBox.Show("Invalid first name. First letter should be capital, and it should be between 3 - 10 letters.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show("Invalid first name. First letter should be capital, and it should be between 3 - 10 letters."
+                        , "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                     return;
                 }
 
                 // Validate last name
                 if (!IsValidName(lastName))
                 {
-                    MessageBox.Show("Invalid last name.It should be longer than 0 letters and no longer than 10 letters.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show("Invalid last name.It should be longer than 0 letters and no longer than 10 letters."
+                        , "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                     return;
                 }
 
@@ -76,7 +100,6 @@ namespace GritzmanMotorsWPF
                     return;
                 }
 
-
                 int registrationResult = await apiService.InsertEmployee(employee);
 
                 // Display a message based on the registration result
@@ -88,36 +111,13 @@ namespace GritzmanMotorsWPF
 
                 }
                 else
-                {
                     MessageBox.Show("Registration failed. Please try again.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                }
             }
             catch (Exception ex)
             {
                 // Handle exceptions, log, or display an error message
                 MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-        }
-
-        private async void SpecializationComboBox()
-        {
-            ApiService apiService = new ApiService();
-            lst = (await (apiService.GetSpecializationList()));
-            specializationComboBox.ItemsSource = lst.Select(x => x.SpecializationName);
-        }
-
-        private void ClearFields()
-        {
-            // Clear the textboxes and other fields
-            txtFirstName.Text = string.Empty;
-            txtLastName.Text = string.Empty;
-            dpDateOfBirth.SelectedDate = null; // Clear the DatePicker
-
-        }
-
-        private bool IsValidName(string name)
-        {
-            return nameRegex.IsMatch(name);
         }
 
     }

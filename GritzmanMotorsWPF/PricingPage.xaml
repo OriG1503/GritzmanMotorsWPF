@@ -12,7 +12,8 @@
         <local:NavigationBar Panel.ZIndex="1000" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="32,75,0,0"/>
         <local:Background/>
 
-        <ListView Margin="196,174,198,50" Name="dataListView" FontSize="20" Foreground="#ffff" Background="Transparent" RenderTransformOrigin="0.5,0.5">
+        <ListView Margin="196,174,198,50" Name="dataListView" FontSize="20" 
+                  Foreground="#ffff" Background="Transparent" RenderTransformOrigin="0.5,0.5">
             <ListView.ItemContainerStyle>
                 <Style TargetType="ListViewItem">
                     <Setter Property="Background" Value="Transparent"/>
@@ -20,8 +21,10 @@
             </ListView.ItemContainerStyle>
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="Car Company" Width="200" DisplayMemberBinding="{Binding ModelCode.CompanyCode.CarCompanyName}" />
-                    <GridViewColumn Header="Car Model" Width="200" DisplayMemberBinding="{Binding ModelCode.CarModelName}" />
+                    <GridViewColumn Header="Car Company" Width="200" 
+                                    DisplayMemberBinding="{Binding ModelCode.CompanyCode.CarCompanyName}" />
+                    <GridViewColumn Header="Car Model" Width="200" 
+                                    DisplayMemberBinding="{Binding ModelCode.CarModelName}" />
                     <GridViewColumn Header="Price" Width="200" DisplayMemberBinding="{Binding Price}" />
                 </GridView>
             </ListView.View>

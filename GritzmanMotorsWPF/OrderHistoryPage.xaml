@@ -9,19 +9,24 @@
       Title="OrderHistoryPage">
 
     <Grid>
-        <local:NavigationBar Panel.ZIndex="1000" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="32,75,0,0"/>
+        <local:NavigationBar Panel.ZIndex="1000" VerticalAlignment="Top" HorizontalAlignment="Center" 
+                             Margin="32,75,0,0"/>
         <local:Background/>
 
         <StackPanel HorizontalAlignment="Right" VerticalAlignment="Top">
-            <Button x:Name="markAsDoneButton" Content="Mark As Done" Panel.ZIndex="1001" FontSize="24" Visibility="Collapsed" Foreground="White" Click="MarkAsDone_Click" Height="50" Margin="1161,75,61,899" Width="182">
+            <Button x:Name="markAsDoneButton" Content="Mark As Done" Panel.ZIndex="1001" 
+                    FontSize="24" Visibility="Collapsed" Foreground="White" Click="MarkAsDone_Click" 
+                    Height="50" Margin="1161,75,61,899" Width="182">
                 <Button.Style>
                     <Style TargetType="{x:Type Button}">
                         <Setter Property="Background" Value="#66CDAA"/>
                         <Setter Property="Template">
                             <Setter.Value>
                                 <ControlTemplate TargetType="{x:Type Button}">
-                                    <Border Background="{TemplateBinding Background}" CornerRadius="10">
-                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    <Border Background="{TemplateBinding Background}" 
+                                            CornerRadius="10">
+                                        <ContentPresenter HorizontalAlignment="Center" 
+                                                          VerticalAlignment="Center"/>
                                     </Border>
                                 </ControlTemplate>
                             </Setter.Value>
@@ -30,21 +35,72 @@
                 </Button.Style>
             </Button>
         </StackPanel>
+            <TextBox x:Name="txtFirstName" Width="290" Height="40" HorizontalAlignment="Right"
+                     VerticalAlignment="Top" Margin="0,14,0,0" FontSize="20" Text="">
+                <TextBox.Foreground>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                        <GradientStop Color="#800080" Offset="0.0"/>
+                        <!-- Purple gradient -->
+                        <GradientStop Color="#9932CC" Offset="0.25"/>
+                        <GradientStop Color="#8A2BE2" Offset="0.5"/>
+                        <GradientStop Color="#800080" Offset="0.75"/>
+                        <GradientStop Color="#9932CC" Offset="1.0"/>
+                    </LinearGradientBrush>
+                </TextBox.Foreground>
+            </TextBox>
+        <Button x:Name="filterByCustomerName" Content="Filter By Customer Name" Panel.ZIndex="1001" 
+        FontSize="24" Foreground="White" Click="SortByCustomerNameClick" 
+        Height="50" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,69,18,0">
+            <Button.Style>
+                <Style TargetType="{x:Type Button}">
+                    <Setter Property="Background" Value="#66CDAA"/>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type Button}">
+                                <Border Background="{TemplateBinding Background}" 
+                        CornerRadius="10">
+                                    <ContentPresenter HorizontalAlignment="Center" 
+                                      VerticalAlignment="Center"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </Button.Style>
+        </Button>
 
-        <ListView Margin="196,174,198,50" Name="dataListView" FontSize="20" Foreground="#ffff" Background="Transparent" RenderTransformOrigin="0.5,0.5">
+
+        <ListView Margin="197,176,197,74" Name="dataListView" FontSize="20" 
+                  Foreground="#ffff" Background="Transparent" RenderTransformOrigin="0.5,0.5">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="ID" Width="50" DisplayMemberBinding="{Binding Id}" />
                     <GridViewColumn Header="Customer" Width="110" DisplayMemberBinding="{Binding CustomerCode.FirstName}" />
-                    <GridViewColumn Header="Car Company" Width="130" DisplayMemberBinding="{Binding PriceCode.ModelCode.CompanyCode.CarCompanyName}" />
-                    <GridViewColumn Header="Car Model" Width="110" DisplayMemberBinding="{Binding PriceCode.ModelCode.CarModelName}" />
+                    <GridViewColumn Header="Car Company" Width="130" 
+                                    DisplayMemberBinding="{Binding PriceCode.ModelCode.CompanyCode.CarCompanyName}" />
+                    <GridViewColumn Header="Car Model" Width="110" 
+                                    DisplayMemberBinding="{Binding PriceCode.ModelCode.CarModelName}" />
                     <GridViewColumn Header="Price" Width="80" DisplayMemberBinding="{Binding PriceCode.Price}" />
                     <GridViewColumn Header="Car Ready" Width="100" DisplayMemberBinding="{Binding CarReady}" />
                     <GridViewColumn Header="Employee" Width="110" DisplayMemberBinding="{Binding EmployeeCode.FirstName}" />
-                    <GridViewColumn Header="Date Of Treatment" Width="180" DisplayMemberBinding="{Binding DateOfTreatment}" />
+                    <GridViewColumn Header="Date Of Treatment" 
+                                    Width="180" DisplayMemberBinding="{Binding DateOfTreatment}" />
                     <GridViewColumn Header="Date Of Order" Width="140" DisplayMemberBinding="{Binding DateOfOrder}" />
                 </GridView>
             </ListView.View>
+            <ListView.ContextMenu>
+                <ContextMenu>
+                    
+                    <MenuItem Header="Sort By Date Ascending " Click="SortByDateAscClick"/>
+                    <MenuItem Header="Sort By Date Descending" Click="SortByDateDescClick"/>
+                    <MenuItem Header="Sort By Price Ascending" Click="SortByPriceAscClick"/>
+                    <MenuItem Header="Sort By Price Descending" Click="SortByPriceDescClick"/>
+                    <MenuItem Header="Sort By CarReady False" Click="SortByCarReadyFalseClick"/>
+                    <MenuItem Header="Sort By CarReady True" Click="SortByCarReadyTrueClick"/>
+                    <MenuItem Header="Cancel All Sorts" Click="CancelAllSortsClick"/>
+
+                </ContextMenu>
+            </ListView.ContextMenu>
         </ListView>
         
     </Grid>

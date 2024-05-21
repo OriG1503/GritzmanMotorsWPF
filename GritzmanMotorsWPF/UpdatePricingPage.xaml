@@ -19,7 +19,7 @@
         <local:NavigationBar Panel.ZIndex="1000" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="32,75,0,0"/>
         <local:Background/>
         <Image Source="Images/Phone.png" Margin="720,318,230,230"/>
-        <StackPanel HorizontalAlignment="Left" VerticalAlignment="Top" Margin="354,389,0,0">
+        <StackPanel HorizontalAlignment="Left" VerticalAlignment="Top" Margin="354,250,0,0">
             <!-- Adjust Width, Height, and Margin accordingly -->
             <Label Content="Car Company:" FontSize="24" Foreground="#66CDAA" Margin="0,0,0,5" FontFamily="Segoe UI" FontWeight="Bold"/>
             <Border Width="300" Height="40" CornerRadius="20" BorderBrush="White" BorderThickness="6">

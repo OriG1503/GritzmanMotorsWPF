@@ -20,10 +20,10 @@ namespace GritzmanMotorsWPF
         {
             InitializeComponent();
 
-            this.ResizeMode = ResizeMode.NoResize;
+            //this.ResizeMode = ResizeMode.NoResize;
+            //this.SizeToContent = SizeToContent.Manual;
+            this.ResizeMode = ResizeMode.CanResize;
             this.SizeToContent = SizeToContent.Manual;
-            
-
         }
         private void Login()
         {

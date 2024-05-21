@@ -29,8 +29,22 @@ namespace GritzmanMotorsWPF
             CarCompanyComboBox();
         }
 
+        private void ClearFields()
+        {
+            // Clear the textboxes and other fields
+            txtCarModelName.Text = string.Empty;
+        }
+
+        private async void CarCompanyComboBox()
+        {
+            ApiService apiService = new ApiService();
+            lst = (await (apiService.GetCarCompanyList()));
+            carCompanyComboBox.ItemsSource = lst.Select(x => x.CarCompanyName);
+        }
+
         private async void AddNewCarModel_Click(object sender, RoutedEventArgs e)
         {
+            //הפעולה מוסיפה מודל רכב חדש למערכת ומנווטת לדף המחירון אם הוספת המודל הצליחה, אחרת מציגה הודעת שגיאה
             try
             {
                 CarModel carModel = new CarModel
@@ -63,19 +77,6 @@ namespace GritzmanMotorsWPF
                 // Handle exceptions, log, or display an error message
                 MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-        }
-
-        private void ClearFields()
-        {
-            // Clear the textboxes and other fields
-            txtCarModelName.Text = string.Empty;
-        }
-
-        private async void CarCompanyComboBox()
-        {
-            ApiService apiService = new ApiService();
-            lst = (await (apiService.GetCarCompanyList()));
-            carCompanyComboBox.ItemsSource = lst.Select(x => x.CarCompanyName);
         }
     }
 }
